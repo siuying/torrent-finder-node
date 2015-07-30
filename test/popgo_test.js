@@ -1,17 +1,17 @@
 import mocha from 'mocha'
 import expect from 'expect.js'
-import DMHY from '../lib/dmhy'
+import Popgo from '../lib/popgo'
 
-describe('DMHY', () => {
+describe('Popgo', () => {
   var scraper = null
 
   beforeEach(() => {
-    scraper = new DMHY()
+    scraper = new Popgo()
   })
 
   describe('#name', () => {
-    it('should be dmhy', () => {
-      expect(scraper.name()).to.equal("dmhy")
+    it('should be popgo', () => {
+      expect(scraper.name()).to.equal("popgo")
     })
   })
 
