@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "Search torrents.",
   "main": "./dist/index.js",
+  "homepage": "https://github.com/siuying/torrent-finder",
+  "bugs": {
+    "url": "https://github.com/siuying/torrent-finder/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/siuying/torrent-finder.git"
+  },
   "scripts": {
     "start": "babel lib/ --stage 0 --optional runtime  --out-file dist/index.js",
     "test": "mocha --compilers js:babel/register"
