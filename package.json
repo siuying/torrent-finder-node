@@ -1,5 +1,5 @@
 {
-  "name": "torrent-finder-node",
+  "name": "torrent-finder",
   "version": "1.0.0",
   "description": "Search torrents.",
   "main": "./dist/index.js",
