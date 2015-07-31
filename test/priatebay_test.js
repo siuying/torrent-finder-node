@@ -38,9 +38,15 @@ describe('PirateBay', () => {
   describe('#search', () => {
     it('should search dmhy and find something', function(done){
       this.timeout(10000);
-      scraper.search('Arslan Senki', (error, result) => {
-        expect(result).to.be.ok()
-        expect(result.length > 0).to.be.ok()
+      scraper.search('Arslan Senki', (error, results) => {
+        expect(results).to.be.ok()
+        expect(results.length > 0).to.be.ok()
+
+        var result = results[0]
+        expect(result.category).to.be.ok()
+        expect(result.size).to.be.ok()
+        expect(result.name).to.be.ok()
+        expect(result.link).to.be.ok()
         done()
       })
     })
