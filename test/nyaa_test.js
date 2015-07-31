@@ -34,7 +34,7 @@ describe('Nyaa', () => {
   })
 
   describe('#search', () => {
-    it('should search dmhy and find something', (done) => {
+    it('should find something', (done) => {
       scraper.search('Arslan Senki', (error, results) => {
         expect(results).to.be.ok()
         expect(results.length > 0).to.be.ok()
@@ -43,6 +43,7 @@ describe('Nyaa', () => {
         expect(result.category).to.be.ok()
         expect(result.size).to.be.ok()
         expect(result.name).to.be.ok()
+        expect(result.name).to.match(/Arslan/)
         expect(result.link).to.be.ok()
         done()
       })

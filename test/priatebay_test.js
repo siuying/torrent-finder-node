@@ -36,7 +36,7 @@ describe('PirateBay', () => {
   })
 
   describe('#search', () => {
-    it('should search dmhy and find something', function(done){
+    it('should search find something', function(done){
       this.timeout(10000);
       scraper.search('Arslan Senki', (error, results) => {
         expect(results).to.be.ok()
@@ -46,8 +46,8 @@ describe('PirateBay', () => {
         expect(result.category).to.be.ok()
         expect(result.size).to.be.ok()
         expect(result.name).to.be.ok()
+        expect(result.name).to.match(/Arslan/)
         expect(result.link).to.be.ok()
-        console.log(results)
         done()
       })
     })
