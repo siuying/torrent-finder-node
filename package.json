@@ -12,7 +12,7 @@
     "url": "https://github.com/siuying/torrent-finder.git"
   },
   "scripts": {
-    "start": "babel lib/ --stage 0 --optional runtime  --out-file dist/index.js",
+    "start": "babel lib/ --stage 0 --optional runtime  --out-dir dist",
     "test": "mocha --compilers js:babel/register"
   },
   "author": "Francis Chong <francis@ignition.hk> (http://reality.hk/)",

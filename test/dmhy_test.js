@@ -1,12 +1,12 @@
 import mocha from 'mocha'
 import expect from 'expect.js'
-import DMHY from '../lib/dmhy'
+import Dmhy from '../lib/dmhy'
 
-describe('DMHY', () => {
+describe('Dmhy', () => {
   var scraper = null
 
   beforeEach(() => {
-    scraper = new DMHY()
+    scraper = new Dmhy()
   })
 
   describe('#name', () => {

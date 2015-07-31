@@ -1,86 +1,28 @@
 'use strict';
 
-var _createClass = require('babel-runtime/helpers/create-class')['default'];
-
-var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
-
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _request = require('request');
+var _dmhy = require('./dmhy');
 
-var _request2 = _interopRequireDefault(_request);
+var _dmhy2 = _interopRequireDefault(_dmhy);
 
-var _cheerio = require('cheerio');
+var _nyaa = require('./nyaa');
 
-var _cheerio2 = _interopRequireDefault(_cheerio);
+var _nyaa2 = _interopRequireDefault(_nyaa);
 
-function parseBody(body, callback) {
-  var $ = _cheerio2['default'].load(body);
-  var rows = $("#topic_list tr");
-  var results = rows.map(function (index, element) {
-    var row = $(element);
-    var name = row.find("td.title > a").text().trim();
-    var link = row.find('a.arrow-magnet').attr('href');
-    var size = row.find("td:nth-child(5)").text().trim();
-    var seeders = Number(row.find("td:nth-child(6)").text().trim());
-    var leechers = Number(row.find("td:nth-child(7)").text().trim());
-    return {
-      name: name,
-      link: link,
-      size: size,
-      seeders: seeders,
-      leechers: leechers
-    };
-  }).toArray().filter(function (r) {
-    return r.name && r.link;
-  });
-  callback(null, results);
-}
+var _popgo = require('./popgo');
 
-var DMHY = (function () {
-  function DMHY() {
-    _classCallCheck(this, DMHY);
-  }
+var _popgo2 = _interopRequireDefault(_popgo);
 
-  _createClass(DMHY, [{
-    key: 'name',
-    value: function name() {
-      return "dmhy";
-    }
-  }, {
-    key: 'list',
-    value: function list(page, callback) {
-      if (page === undefined) page = 0;
+var _piratebay = require('./piratebay');
 
-      var url = page == 0 ? "http://share.dmhy.org/" : 'http://share.dmhy.org/topics/list/page/' + (page + 1);
-      (0, _request2['default'])(url, function (error, response, body) {
-        if (error) {
-          callback(error, null);
-          return;
-        }
-        parseBody(body, callback);
-      });
-    }
-  }, {
-    key: 'search',
-    value: function search(terms, callback) {
-      var url = "http://share.dmhy.org/topics/list";
-      (0, _request2['default'])({ method: 'POST', uri: url, form: { keyword: terms } }, function (error, response, body) {
-        if (error) {
-          callback(error, null);
-          return;
-        }
-        parseBody(body, callback);
-      });
-    }
-  }]);
+var _piratebay2 = _interopRequireDefault(_piratebay);
 
-  return DMHY;
-})();
-
-exports['default'] = DMHY;
+exports['default'] = {
+  Dmhy: _dmhy2['default'], Nyaa: _nyaa2['default'], Popgo: _popgo2['default'], Piratebay: _piratebay2['default']
+};
 module.exports = exports['default'];
