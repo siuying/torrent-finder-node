@@ -47,6 +47,7 @@ describe('PirateBay', () => {
         expect(result.size).to.be.ok()
         expect(result.name).to.be.ok()
         expect(result.link).to.be.ok()
+        console.log(results)
         done()
       })
     })
