@@ -1,6 +1,6 @@
 {
   "name": "torrent-finder",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "Search torrents.",
   "main": "./dist/index.js",
   "homepage": "https://github.com/siuying/torrent-finder",
