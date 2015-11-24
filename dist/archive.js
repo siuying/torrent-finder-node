@@ -1,9 +1,5 @@
 'use strict';
 
-var _get = require('babel-runtime/helpers/get')['default'];
-
-var _inherits = require('babel-runtime/helpers/inherits')['default'];
-
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
 
 var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
@@ -13,10 +9,6 @@ var _interopRequireDefault = require('babel-runtime/helpers/interop-require-defa
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-
-var _base_scraper = require('./base_scraper');
-
-var _base_scraper2 = _interopRequireDefault(_base_scraper);
 
 var _es6Promise = require('es6-promise');
 
@@ -35,13 +27,33 @@ function parser(body) {
   });
 }
 
-var Archive = (function (_BaseScraper) {
-  _inherits(Archive, _BaseScraper);
+function requestAndParse(url, parser, callback) {
+  if (typeof callback === 'function') {
+    (0, _request2['default'])(url, function (error, response, body) {
+      if (error) {
+        callback(error, null);
+        return;
+      }
+      callback(null, parser(body));
+    });
+    return;
+  }
 
+  return new _es6Promise.Promise(function (resolve, reject) {
+    var categories;
+    (0, _request2['default'])(url, function (error, response, body) {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(body);
+    });
+  });
+}
+
+var Archive = (function () {
   function Archive() {
     _classCallCheck(this, Archive);
-
-    _get(Object.getPrototypeOf(Archive.prototype), 'constructor', this).apply(this, arguments);
   }
 
   _createClass(Archive, [{
@@ -87,7 +99,7 @@ var Archive = (function (_BaseScraper) {
   }]);
 
   return Archive;
-})(_base_scraper2['default']);
+})();
 
 exports['default'] = Archive;
 module.exports = exports['default'];
