@@ -67,7 +67,8 @@ var Dmhy = (function (_BaseScraper) {
   }, {
     key: "search",
     value: function search(terms, callback) {
-      var url = "http://share.dmhy.org/topics/list";
+      var query = encodeURIComponent(terms);
+      var url = "http://share.dmhy.org/topics/list?keyword=" + query;
       return this.requestAndParse(url, parseBody, callback);
     }
   }]);
