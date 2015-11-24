@@ -27,7 +27,7 @@ function parser(body) {
   });
 }
 
-function requestAndParse(url, parser, callback) {
+function requestAndParse(url, callback) {
   if (typeof callback === 'function') {
     (0, _request2['default'])(url, function (error, response, body) {
       if (error) {
@@ -46,7 +46,7 @@ function requestAndParse(url, parser, callback) {
         reject(error);
         return;
       }
-      resolve(body);
+      resolve(parser(body));
     });
   });
 }
@@ -71,13 +71,7 @@ var Archive = (function () {
       url = url + "+AND+" + encodeURIComponent("format:(Archive BitTorrent)");
       url = url + "&fl[]=identifier,title,mediatype,format&rows=50&output=json";
       url = url + ('&page=' + (page + 1));
-      (0, _request2['default'])(url, function (error, response, body) {
-        if (error) {
-          callback(error, null);
-          return;
-        }
-        callback(null, parser(body));
-      });
+      return requestAndParse(url, callback);
     }
   }, {
     key: 'search',
@@ -88,13 +82,7 @@ var Archive = (function () {
       url = url + "+AND+" + encodeURIComponent("mediatype:(movies)");
       url = url + "+AND+" + encodeURIComponent("format:(Archive BitTorrent)");
       url = url + "&fl[]=identifier,title,mediatype,format&rows=50&output=json";
-      (0, _request2['default'])(url, function (error, response, body) {
-        if (error) {
-          callback(error, null);
-          return;
-        }
-        callback(null, parser(body));
-      });
+      return requestAndParse(url, callback);
     }
   }]);
 
