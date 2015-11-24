@@ -34,7 +34,11 @@ function requestAndParse(url, callback) {
         callback(error, null);
         return;
       }
-      callback(null, parser(body));
+      try {
+        callback(null, parser(body));
+      } catch (e) {
+        reject(e);
+      }
     });
     return;
   }
@@ -46,7 +50,11 @@ function requestAndParse(url, callback) {
         reject(error);
         return;
       }
-      resolve(parser(body));
+      try {
+        resolve(parser(body));
+      } catch (e) {
+        reject(e);
+      }
     });
   });
 }
@@ -76,10 +84,12 @@ var Archive = (function () {
   }, {
     key: 'search',
     value: function search(terms, callback) {
-      var query = encodeURIComponent(terms);
       var url = "https://archive.org/advancedsearch.php?q=";
-      url = url + query;
-      url = url + "+AND+" + encodeURIComponent("mediatype:(movies)");
+      if (terms) {
+        var query = encodeURIComponent(terms);
+        url = url + query + "+AND+";
+      }
+      url = url + encodeURIComponent("mediatype:(movies)");
       url = url + "+AND+" + encodeURIComponent("format:(Archive BitTorrent)");
       url = url + "&fl[]=identifier,title,mediatype,format&rows=50&output=json";
       return requestAndParse(url, callback);

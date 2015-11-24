@@ -50,5 +50,14 @@ describe('Archive', () => {
         done()
       })
     })
+
+    it('should find something even search is empty', function(done){
+      this.timeout(10000);
+      scraper.search('', (error, results) => {
+        expect(results).to.be.ok()
+        expect(results.length > 0).to.be.ok()
+        done()
+      })
+    })
   })
 })
