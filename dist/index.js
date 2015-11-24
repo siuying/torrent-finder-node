@@ -14,6 +14,10 @@ var _dmhy = require('./dmhy');
 
 var _dmhy2 = _interopRequireDefault(_dmhy);
 
+var _kickass = require('./kickass');
+
+var _kickass2 = _interopRequireDefault(_kickass);
+
 var _nyaa = require('./nyaa');
 
 var _nyaa2 = _interopRequireDefault(_nyaa);
@@ -27,6 +31,6 @@ var _piratebay = require('./piratebay');
 var _piratebay2 = _interopRequireDefault(_piratebay);
 
 exports['default'] = {
-  Archive: _archive2['default'], Dmhy: _dmhy2['default'], Nyaa: _nyaa2['default'], Popgo: _popgo2['default'], Piratebay: _piratebay2['default']
+  Archive: _archive2['default'], Dmhy: _dmhy2['default'], Kickass: _kickass2['default'], Nyaa: _nyaa2['default'], Popgo: _popgo2['default'], Piratebay: _piratebay2['default']
 };
 module.exports = exports['default'];
