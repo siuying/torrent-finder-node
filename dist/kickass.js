@@ -48,27 +48,40 @@ var Kickass = (function () {
     value: function list(page, callback) {
       if (page === undefined) page = 0;
 
-      return (0, _kickassTorrent2['default'])({ q: "category:movies category:tv category:anime", field: 'seeders', page: page + 1, url: 'https://kat.cr' }, function (error, data) {
-        if (error) {
-          callback(error);
-          return;
-        }
-
-        var result = mapper(data);
-        return callback(null, result);
-      });
+      return this.requestKickass("category:movies category:tv category:anime", callback);
     }
   }, {
     key: 'search',
     value: function search(terms, callback) {
-      return (0, _kickassTorrent2['default'])({ q: terms, field: 'seeders', url: 'https://kat.cr' }, function (error, data) {
-        if (error) {
-          callback(error);
-          return;
-        }
+      return this.requestKickass(terms, callback);
+    }
+  }, {
+    key: 'requestKickass',
+    value: function requestKickass(terms, callback) {
+      if (typeof callback === 'function') {
+        (0, _kickassTorrent2['default'])({ q: terms, field: 'seeders', url: 'https://kat.cr' }, function (error, data) {
+          if (error) {
+            callback(error);
+            return;
+          }
 
-        var result = mapper(data);
-        return callback(null, result);
+          var result = mapper(data);
+          return callback(null, result);
+        });
+        return;
+      }
+
+      return new _es6Promise.Promise(function (resolve, reject) {
+        var categories;
+        (0, _kickassTorrent2['default'])({ q: terms, field: 'seeders', url: 'https://kat.cr' }, function (error, data) {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          var result = mapper(data);
+          return resolve(result);
+        });
       });
     }
   }]);
